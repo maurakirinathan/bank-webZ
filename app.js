@@ -46,19 +46,13 @@ var properties = PropertiesReader('PropertiesReader.js');
  var host =  properties.get('db.host');
  var port = properties.get('db.port');
  var keyspace = properties.get('db.keyspace');
-var elasassandra_port = properties.get('db.elasassandra');
 
 
 /*
 var host =  process.env.CASSANDRA_HOST;
 var port = process.env.CASSANDRA_PORT;
 var keyspace = process.env.CASSANDRA_KEYSPACE;
-var elasassandra_port = process.env.ELASASSANDRA_PORT;
 */
-/*var elasticsearch = require('elasticsearch');
-var client = new elasticsearch.Client({
-    host: host+':'+elasassandra_port,
-});*/
 
 
 var client = new cassandra.Client({contactPoints: [host+':'+port], keyspace: keyspace});
@@ -105,13 +99,13 @@ app.get('/allblocks/:id',auth,allblocks.list_one);
 app.post('/allblocks_search',auth,allblocks.list_search);
 app.post('/alltransaction_blocks',auth,allblocks.list_alltransaction_blocks);
 
-app.get('/allblocks_previous/:id',auth,allblocks.list_paging_previous);
+//app.get('/allblocks_previous/:id',allblocks.list_paging_previous);
 app.get('/allblocks_next/:id',auth,allblocks.list_paging_next);
 
 
 app.get('/allpromizes',auth,allpromizes.list);
 app.get('/alltransaction_promize/:id',auth,allpromizes.transactions_for_promize);
-app.get('/allpromizes_previous/:id',allpromizes.list_paging_previous);
+//app.get('/allpromizes_previous/:id',allpromizes.list_paging_previous);
 app.get('/allpromizes_next/:id',auth,allpromizes.list_paging_next);
 app.get('/promizesview/:id',auth,allpromizes.list_one);
 app.post('/allpromizes_search',auth,allpromizes.list_search);
@@ -120,7 +114,7 @@ app.post('/allpromizes_search',auth,allpromizes.list_search);
 app.get('/processingTransaction',auth,processingTransaction.list);
 app.get('/processingTransaction/:id',auth,processingTransaction.list_one);
 app.post('/processingTransaction_search',auth,processingTransaction.list_search);
-app.get('/processingTransaction_previous/:id',auth,processingTransaction.list_paging_previous);
+//app.get('/processingTransaction_previous/:id',pendingTransaction.list_paging_previous);
 app.get('/processingTransaction_next/:id',auth,processingTransaction.list_paging_next);
 
 

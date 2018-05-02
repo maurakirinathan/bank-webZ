@@ -1,64 +1,19 @@
 const  client = require("./cassandrainfo")
-const client_elasticsearch =require("./elasticsearch")
 /*
  * GET blocks listing.
  */
 exports.list =  function (req, res) {
 
     console.log('allblocks: list');
-
-    // var id = req.params.id;
-    var input = JSON.parse(JSON.stringify(req.body));
-
-    var validate = require('uuid-validate');
-
-
-    console.log(input);
-    console.log('promizes: list_search');
-
-    client_elasticsearch.search({
-        index: 'blocks',
-
-        body: {
-            query: {
-
-                bool: {
-                    must: [
-                        {
-                            term: {miner: "sampath"}
-                        }
-                    ]
-                }
-            },
-            sort: [
-                {timestamp: "desc"}
-            ],
-            from: 0, size: 10
+    client.execute('SELECT id,timestamp,transactions,miner FROM blocks LIMIT 10', [], function (err, result) {
+        if (err) {
+            console.log('allblocks: list err:', err);
+            res.status(404).send({msg: err});
+        } else {
+            console.log('allblocks: list succ:', result.rows);
+            res.render('allblocks', {page_title: "All Blocks", data: result.rows})
         }
-    }).then(function (resp) {
-        var result = [];
-        for (var i = 0; i < resp.hits.hits.length; i++) {
-            result.push(resp.hits.hits[i]._source);
-            console.log(resp.hits.hits[i]._source.transactions.id.length);
-        }
-      //  console.log(resp.hits.hits);
-
-
-        res.render('allblocks', {page_title: "All Blocks", data: result})
-
-    }, function (err) {
-        console.trace(err.message);
     });
-
-    /* client.execute('SELECT id,timestamp,transactions,miner FROM blocks LIMIT 10', [], function (err, result) {
-         if (err) {
-             console.log('allblocks: list err:', err);
-             res.status(404).send({msg: err});
-         } else {
-             console.log('allblocks: list succ:', result.rows);
-             res.render('allblocks', {page_title: "All Blocks", data: result.rows})
-         }
-     });*/
 
 };
 
@@ -113,48 +68,6 @@ exports.list_search = function (req, res) {
     var validate = require('uuid-validate');
 
 
-    console.log(input);
-    console.log('blocks: list_search');
-    if (input.id) {
-        client_elasticsearch.search({
-            index: 'blocks',
-
-            body: {
-                query: {
-                    bool: {
-                        must: [
-                            {
-
-                                wildcard: {
-                                    id: input.id + "*"
-
-                                }
-                            }
-
-                        ]
-                    }
-
-                }
-            }
-        }).then(function (resp) {
-            var result = [];
-            for (var i = 0; i < resp.hits.hits.length; i++) {
-                result.push(resp.hits.hits[i]._source);
-            }
-            console.log(resp.hits.hits);
-
-            res.render('allblocks', {page_title: "Block Details", data: result});
-
-        }, function (err) {
-            console.trace(err.message);
-        });
-    }
-    else {
-        var result = [];
-        res.render('allblocks', {page_title: "Block Details",});
-    }
-
-/*
         console.log(input);
     console.log('block: list_search');
     if (validate(input.id)) {
@@ -174,7 +87,7 @@ exports.list_search = function (req, res) {
     {
          var result=[];
         res.render('allblocks', {page_title: "Block Details", data:result});
-    }*/
+    }
 };
 
 
@@ -182,55 +95,12 @@ exports.list_search = function (req, res) {
 /*
  * GET cheques listing pagging next. run
  */
-var test1=0;
 exports.list_paging_next = function (req, res) {
 
-
-    test1=test1+10;
-console.log('allblocks: list');
+    console.log('allblocks: list');
     var id = req.params.id;
-    var input = JSON.parse(JSON.stringify(req.body));
 
-    var validate = require('uuid-validate');
-
-
-    console.log(input);
-    console.log('blocks: list_search');
-
-    client_elasticsearch.search({
-        index: 'blocks',
-
-        body: {
-            query: {
-
-                bool: {
-                    must: [
-                        {
-                            term: {miner: "sampath"}
-                        }
-                    ]
-                }
-            },
-            sort: [
-                {miner: "desc"}
-            ],
-            from: test1, size: 10
-        }
-    }).then(function (resp) {
-        var result = [];
-        for (var i = 0; i < resp.hits.hits.length; i++) {
-            result.push(resp.hits.hits[i]._source);
-        }
-        console.log(resp.hits.hits);
-        //  console.log(str);
-
-        res.render('allblocks', {page_title: "All Blocks", data: result})
-
-    }, function (err) {
-        console.trace(err.message);
-    });
-
-  /*  console.log('id:  ' +id );
+    console.log('id:  ' +id );
     client.execute("SELECT id,timestamp,transactions,miner FROM blocks WHERE id < "+ id + "LIMIT 10 ALLOW FILTERING", [], function (err, result) {
         if (err) {""
             console.log('allblocks: list err:', err);
@@ -243,7 +113,7 @@ console.log('allblocks: list');
             //res.render('allblocks_next', {page_title: "All Blocks", data: result.rows})
 
         }
-    });*/
+    });
 
 };
 
@@ -252,57 +122,7 @@ console.log('allblocks: list');
  */
 exports.list_paging_previous = function (req, res) {
 
-
-    test1=test1-10;
-    if(test1<0)
-    {
-        test1=0;
-    }
-
     console.log('allblocks: list');
-    var id = req.params.id;
-    var input = JSON.parse(JSON.stringify(req.body));
-
-    var validate = require('uuid-validate');
-
-
-    console.log(input);
-    console.log('promizes: list_search');
-
-    client_elasticsearch.search({
-        index: 'blocks',
-
-        body: {
-            query: {
-
-                bool: {
-                    must: [
-                        {
-                            term: {miner: "sampath"}
-                        }
-                    ]
-                }
-            },
-            sort: [
-                {miner: "desc"}
-            ],
-            from: test1, size: 10
-        }
-    }).then(function (resp) {
-        var result = [];
-        for (var i = 0; i < resp.hits.hits.length; i++) {
-            result.push(resp.hits.hits[i]._source);
-        }
-        console.log(resp.hits.hits);
-        //  console.log(str);
-
-        res.render('allblocks', {page_title: "All Blocks", data: result})
-
-    }, function (err) {
-        console.trace(err.message);
-    });
-
-/*    console.log('allblocks: list');
     var id = req.params.id;
     console.log('id:', id);
     client.execute("SELECT id,timestamp,transactions,miner FROM blocks WHERE expr(block_lucene_index," +"\'{ sort: [ {type: \"simple\", field: \"id\", reverse: true} ] }"+"\') AND bank='sampath' AND id <"+ id + " LIMIT 10 ALLOW FILTERING", [], function (err, result) {
@@ -314,7 +134,7 @@ exports.list_paging_previous = function (req, res) {
             console.log('allblocks: list succ:', result.rows);
             res.render('allblocks', {page_title: "All Blocks", data: result.rows})
         }
-    });*/
+    });
 
 };
 

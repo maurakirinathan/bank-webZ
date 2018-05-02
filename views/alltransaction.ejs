@@ -19,7 +19,7 @@
 <script>
 
     $(window).scroll(function() {
-        //yHandler();
+        yHandler();
     });
 
 
@@ -77,7 +77,7 @@
                 <td><%= data[i].promize_amount %></td>
                 <td><%= data[i].from_account %></td>
                 <td><%= data[i].to_account %></td>
-                <td> <%=  moment(parseInt(data[i].timestamp)).format("DD MMM YYYY hh:mm:ss a") %></td>
+                <td> <%=  moment(parseInt(data.timestamp)).format("DD MMM YYYY hh:mm:ss a") %></td>
                 <!-- <td>
                     <a class="a-inside edit" href="/pendingTransaction/<%=data[i].id%>">View</a>
                 </td>-->
@@ -93,11 +93,11 @@
             </tbody>
 
         </table>
-    <div align="right" style="padding-top: 2%;">
-
-            <a class="a-inside edit" href="/allTransaction_previous/<%=data.length%>">Previous</a><a class="a-inside edit" href='/allTransaction_next/<%=data.length%>'>Next</a>
-
-        </div>
+      <!--  <div align="right" style="padding-top: 2%;">
+            <% if(data.length){%>
+            <a class="a-inside edit" href="/allTransaction_previous/<%=data[0].id%>">Previous</a><a class="a-inside edit" href='/allTransaction_next/<%=data[data.length-1].id%>'>Next</a>
+            <%}%>
+        </div>-->
     </div>
     <div id="status"></div>
     <div id="wrap">

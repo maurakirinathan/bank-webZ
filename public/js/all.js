@@ -13,7 +13,6 @@ function allblocks(){
 }
 
 var t1 = true;
-var test1 = 0;
 function openNav() {
 
     if (t1) {
