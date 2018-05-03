@@ -437,12 +437,21 @@ body {margin:0}
     display: -ms-flexbox;      /* TWEENER - IE 10 */
     display: -webkit-flex;     /* NEW - Chrome */
     display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-/*    justify-content: center;
-    align-items: center;*/
-    padding-top: 18%;
-    padding-left: 36%;
+    justify-content: center;
+    align-items: center;
+   padding-top: 18%;
+    /*  padding-left: 36%;*/
 }
 
 .app-container form {
     height: 75px;
+}
+
+
+.imageclass
+{
+    padding-left:10%;
+    padding-bottom: 5%;
+    padding-top:10%;
+    width:100%;
 }
