@@ -36,7 +36,7 @@
             $.getJSON('/allpromizes_next/'+ $("#promizesrows tr:last>td:first").text(), function(data){
                 data.filter(function (data, i){
                     var url = '/promizesview/'
-                    $("#promizesrows").append("<tr class='clickable-row'  ><td><a href="+url+data.id+" > " +  data.id + "</a></td> <td>" + data.bank + "</td>  <td>" + data.amount + "</td> </tr>");
+                    $("#promizesrows").append("<tr class='clickable-row'  ><td><a href="+url+data.id+" > " +  data.id + "</a></td> <td>" + data.bank + "</td>  <td>" + data.amount+".00" + "</td> </tr>");
                 });
             })
         }
@@ -79,7 +79,7 @@
                 <td><a href='/promizesview/<%= data[i].id %>' ><%=data[i].id%></a></td>
                 <td><%=data[i].bank%></td>
               <!--  <td><%=data[i].date%></td>-->
-                <td><%=data[i].amount%></td>
+                <td><%=data[i].amount+".00"%></td>
 
 
                <!-- <td>

@@ -23,7 +23,7 @@
             <td class="label" valign="top">Bank</td><td  align="right"><%=data[0].bank%></td>
         </tr>
         <tr>
-            <td class="label" valign="top">iGift Amount</td><td  align="right"><%=data[0].promize_amount%></td>
+            <td class="label" valign="top">iGift Amount</td><td  align="right"><%=data[0].promize_amount+".00"%></td>
         </tr>
         <tr>
             <td class="label" valign="top">iGift Bank</td><td  align="right"><%=data[0].promize_bank%></td>
@@ -39,7 +39,7 @@
         </tr>
         <tr>
 
-            <td class="label" valign="top">Timestamp</td><td  align="right"><%=moment(parseInt(data.timestamp)).format("DD MMM YYYY hh:mm:ss a")%></td>
+            <td class="label" valign="top">Timestamp</td><td  align="right"><%=moment(parseInt(data[0].timestamp)).format("DD MMM YYYY hh:mm:ss a")%></td>
         </tr>
         <tr>
             <td class="label" valign="top">From Zaddress</td><td  align="right"><%=data[0].from_zaddress%></td>

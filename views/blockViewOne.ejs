@@ -33,7 +33,7 @@
             </tr>
             <tr>
                 <td class="label" valign="top">Timestamp</td>
-                <td align="right"><%=  moment(parseInt(data.timestamp)).format("DD MMM YYYY hh:mm:ss a")%></td>
+                <td align="right"><%=  moment(parseInt(data[0].timestamp)).format("DD MMM YYYY hh:mm:ss a")%></td>
             </tr>
         </table>
     </div>
@@ -58,10 +58,10 @@
             <tr>
                 <td><%= data[0].transactions[i].id %></td>
                 <td><%= data[0].transactions[i].bank %></td>
-                <td><%= data[0].transactions[i].promize_amount %></td>
+                <td><%= data[0].transactions[i].promize_amount+".00" %></td>
                 <td><%= data[0].transactions[i].from_account %></td>
                 <td><%= data[0].transactions[i].to_account %></td>
-                <td><%= moment(parseInt(data.timestamp)).format("DD MMM YYYY hh:mm:ss a")%></td>
+                <td><%= moment(parseInt(data[0].transactions[i].timestamp)).format("DD MMM YYYY hh:mm:ss a")%></td>
 
 
             </tr>

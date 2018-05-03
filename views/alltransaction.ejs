@@ -36,7 +36,7 @@
             $.getJSON('/allTransaction_next/' + $("#transectionview tr:last>td:first").text(), function(data){
                 data.filter(function (data, i){
                     var url = '/transectionview/'
-                    $("#transectionview").append("<tr class='clickable-row' ><td><a href="+url+data.id+" > " +  data.id + "</a></td> <td>" +data.bank + "</td> <td>" + data.promize_amount + "</td> <td>" + data.from_account + "</td><td>" + data.to_account + "</td><td>" +moment(parseInt(data.timestamp)).format("DD MMM YYYY hh:mm:ss a") + "</td> </tr>");
+                    $("#transectionview").append("<tr class='clickable-row' ><td><a href="+url+data.id+" > " +  data.id + "</a></td> <td>" +data.bank + "</td> <td>" + data.promize_amount+".00" + "</td> <td>" + data.from_account + "</td><td>" + data.to_account + "</td><td>" +moment(parseInt(data.timestamp)).format("DD MMM YYYY hh:mm:ss a") + "</td> </tr>");
                 });
             })
         }
@@ -74,10 +74,10 @@
             <tr  class='' >
                 <td><a  href='/transectionview/<%= data[i].id %>'><%= data[i].id %></a></td>
                 <td><%= data[i].bank %></td>
-                <td><%= data[i].promize_amount %></td>
+                <td><%= data[i].promize_amount+".00" %></td>
                 <td><%= data[i].from_account %></td>
                 <td><%= data[i].to_account %></td>
-                <td> <%=  moment(parseInt(data.timestamp)).format("DD MMM YYYY hh:mm:ss a") %></td>
+                <td> <%=  moment(parseInt(data[i].timestamp)).format("DD MMM YYYY hh:mm:ss a") %></td>
                 <!-- <td>
                     <a class="a-inside edit" href="/pendingTransaction/<%=data[i].id%>">View</a>
                 </td>-->
