@@ -43,9 +43,11 @@ function closeNav() {
     document.getElementById("logo").style.paddingRight= "0";
 }
 
+/*
 jQuery(document).ready(function($) {
     $(".clickable-row").click(function() {
         window.location = $(this).data("href");
     });
 });
+*/
 
