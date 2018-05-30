@@ -10,10 +10,8 @@ var keyspace = properties.get('db.keyspace');
 var port = process.env.CASSANDRA_PORT;
 var keyspace = process.env.CASSANDRA_KEYSPACE;*/
 
-
-/*
 console.log('host: ' +host);
-console.log('port: ' +port);*/
+console.log('port: ' +port);
 
 var client = new cassandra.Client({contactPoints: [host + ':' + port], keyspace: keyspace});
 client.connect(function (err, result) {
