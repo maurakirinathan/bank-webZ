@@ -72,4 +72,5 @@ exports.init_cassandra = function(req, res){
 			return client.shutdown();
 		});
 
-};*/
+};
+*/
