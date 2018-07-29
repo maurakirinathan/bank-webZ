@@ -78,7 +78,7 @@ exports.list_paging_next = function (req, res) {
     var id = "\'" + req.params.id + "\'";
 
     console.log('id:  ' + id);
-    client.execute("SELECT * FROM users WHERE zaddress > " + id + " LIMIT 10 ALLOW FILTERING", [], function (err, result) {
+    client.execute("SELECT * FROM users WHERE timestamp > " + id + " LIMIT 10 ALLOW FILTERING", [], function (err, result) {
         if (err) {
             ""
             console.log('users: list err:', err);
