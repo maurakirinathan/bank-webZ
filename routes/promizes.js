@@ -4,7 +4,6 @@ const  client = require("./cassandrainfo")
  * GET cheques listing pagging next.
  */
 exports.list_paging_next = function (req, res) {
-
     console.log('allcheques: list');
     var id = req.params.id;
 
@@ -52,7 +51,7 @@ exports.list_paging_next = function (req, res) {
 exports.list = function (req, res) {
 
     console.log('allcheques: list');
-    client.execute('SELECT id,bank,amount FROM promizes LIMIT 10', [], function (err, result) {
+    client.execute('SELECT id,bank,amount FROM promizes  LIMIT 10', [], function (err, result) {
         if (err) {
             console.log('allpromizes: list err:', err);
             res.status(404).send({msg: err});

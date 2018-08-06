@@ -19,10 +19,12 @@
     div.newData{}
 </style>
 <script>
+/*
 
     $(window).scroll(function() {
        yHandler();
     });
+*/
 
 
     function yHandler(){
@@ -75,7 +77,7 @@
             for(var i = 0;i < data.length;i++) { %>
 
             <tr class=''>
-                <td style="display:none;"><%= data[i].timestamp %></td>
+
                 <td><a href='/users_one/<%= data[i].zaddress %>'><%=data[i].zaddress%></a></td>
                 <td><%= data[i].bank %></td>
                 <td><%= data[i].account %></td>
@@ -94,6 +96,9 @@
 
         </table>
 
+    </div>
+    <div align="right" style="padding-top: 2%;padding-right:3%; ">
+        <a class="a-inside edit" onclick=" yHandler()">Next</a>
     </div>
     <div id="status"></div>
     <div id="wrap">

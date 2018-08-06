@@ -5,7 +5,7 @@ const client = require("./cassandrainfo")
 exports.list = function (req, res) {
 
     console.log('users: list');
-    client.execute('SELECT * FROM users LIMIT 10', [], function (err, result) {
+    client.execute('SELECT * FROM users  LIMIT 10', [], function (err, result) {
         if (err) {
             console.log('users: list err:', err);
             res.status(404).send({msg: err});
@@ -78,7 +78,8 @@ exports.list_paging_next = function (req, res) {
     var id = "\'" + req.params.id + "\'";
 
     console.log('id:  ' + id);
-    client.execute("SELECT * FROM users WHERE timestamp > " + id + " LIMIT 10 ALLOW FILTERING", [], function (err, result) {
+    client.execute("SELECT * FROM users WHERE zaddress < " + id + " LIMIT 10 ALLOW FILTERING", [], function (err, result) {
+
         if (err) {
             ""
             console.log('users: list err:', err);

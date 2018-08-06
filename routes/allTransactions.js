@@ -26,7 +26,7 @@ exports.list_one = function (req, res) {
 exports.list_transection = function (req, res) {
 
     console.log('alltransaction: list');
-    client.execute('SELECT id,bank,promize_amount,from_account,to_account,timestamp FROM transactions LIMIT 10', [], function (err, result) {
+    client.execute('SELECT id,bank,promize_amount,from_account,to_account,timestamp FROM transactions LIMIT 10 ', [], function (err, result) {
         if (err) {
             console.log('alltransaction: list err:', err);
             res.status(404).send({msg: err});

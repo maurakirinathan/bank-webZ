@@ -6,7 +6,7 @@ const  client = require("./cassandrainfo")
 exports.list = function (req, res) {
 
     console.log('allblocks: list');
-    client.execute('SELECT id,bank,promize_amount,from_account,to_account,timestamp FROM trans LIMIT 10', [], function (err, result) {
+    client.execute('SELECT id,bank,promize_amount,from_account,to_account,timestamp FROM trans  LIMIT 10', [], function (err, result) {
         if (err) {
             console.log('pending trans: list err:', err);
             res.status(404).send({msg: err});
